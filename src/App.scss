@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  max-width: 400px;
+  margin: 0 auto;
+  font-family: "Open Sans", sans-serif;
+  .home-head-section {
+    background: #434343;
+    padding: 15px;
+    .home-title {
+      text-align: center;
+      color: #e5e5e5;
+      font-weight: 600;
+    }
+    .home-button-selection {
+      display: flex;
+      width: 70%;
+      margin: 0 auto;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 25px;
+      button {
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        background-color: #fff;
+      }
+    }
+    .current-amount {
+      color: #fff;
+      text-align: center;
+      font-size: 30px;
+      margin-top: 25px;
+    }
+  }
+}
