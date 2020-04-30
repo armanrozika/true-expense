@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 .App {
@@ -78,10 +79,25 @@
     position: fixed;
     width: 100%;
     padding: 15px;
-    background-color: #fff;
+    background-color: #ffac46;
     left: 0;
     box-shadow: 0 0 5px #a0a0a0;
     transition: all 600ms ease;
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 15px;
+    }
+    button {
+      width: 100%;
+      padding: 10px 0;
+      margin-top: 15px;
+      border: none;
+      font-size: 16px;
+      background-color: #19a3e4;
+      border-radius: 5px;
+    }
   }
 
   .bottom-0 {
@@ -89,6 +105,6 @@
   }
 
   .bottom-min-100 {
-    bottom: -15%;
+    bottom: -35%;
   }
 }
