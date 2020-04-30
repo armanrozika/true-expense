@@ -10,6 +10,7 @@
   font-family: "Open Sans", sans-serif;
   background-color: #e8e8e8;
   min-height: 100vh;
+
   .home-head-section {
     background: #2f2f2f;
     position: relative;
@@ -71,5 +72,23 @@
       align-items: center;
       justify-content: space-between;
     }
+  }
+
+  .component-add {
+    position: fixed;
+    width: 100%;
+    padding: 15px;
+    background-color: #fff;
+    left: 0;
+    box-shadow: 0 0 5px #a0a0a0;
+    transition: all 600ms ease;
+  }
+
+  .bottom-0 {
+    bottom: 0;
+  }
+
+  .bottom-min-100 {
+    bottom: -15%;
   }
 }

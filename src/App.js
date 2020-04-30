@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./App.scss";
 
 function App() {
+  const [showAdd, setShowAdd] = useState(false);
+
   return (
     <div className="App">
       <section className="home-head-section">
-        <button className="btn-add">+</button>
+        <button className="btn-add" onClick={() => setShowAdd(!showAdd)}>
+          {showAdd ? "x" : "+"}
+        </button>
         <button className="btn-report">R</button>
         <p className="home-title">TRUE EXPENSE v0.1</p>
         <div className="home-button-selection">
@@ -41,6 +45,17 @@ function App() {
           <h4>Others:</h4>
           <p>20.000</p>
         </div>
+      </section>
+
+      <section
+        className={`component-add ${showAdd ? "bottom-0" : "bottom-min-100"}`}
+      >
+        <select name="" id="">
+          <option value="">Food</option>
+          <option value="">Snack</option>
+        </select>
+        <input type="text" placeholder="Amount" />
+        <button>submit</button>
       </section>
     </div>
   );
