@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { GlobalContext } from "./GlobalProvider";
 import { Link } from "react-router-dom";
 
 export default function Home() {
   const [showAdd, setShowAdd] = useState(false);
+  //const [value, setValue] = useContext(GlobalContext);
+  //console.log(value);
   return (
     <>
       <section className="home-head-section">

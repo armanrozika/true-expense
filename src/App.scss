@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  &:focus {
+    outline: none;
+  }
 }
 
 .App {
@@ -67,7 +70,6 @@
     .category-spend {
       background-color: #fff;
       border-radius: 5px;
-      //box-shadow: 0px 2px 4px 0px #c9c8c8;
       padding: 15px;
       display: flex;
       align-items: center;
@@ -106,5 +108,13 @@
 
   .bottom-min-100 {
     bottom: -35%;
+  }
+}
+
+.report {
+  padding: 15px;
+  h4 {
+    text-align: center;
+    font-size: 18px;
   }
 }
