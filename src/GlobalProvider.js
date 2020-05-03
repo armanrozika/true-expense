@@ -3,9 +3,9 @@ import React, { createContext, useState } from "react";
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-  const [value, setValue] = useState("test");
+  const [expense, setExpense] = useState([]);
   return (
-    <GlobalContext.Provider value={[value, setValue]}>
+    <GlobalContext.Provider value={[expense, setExpense]}>
       {children}
     </GlobalContext.Provider>
   );
