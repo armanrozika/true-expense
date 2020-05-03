@@ -5,11 +5,8 @@ import { GlobalContext } from "../GlobalProvider";
 function SpendForm({ showAdd, closeShowAdd }) {
   const [expense, setExpense] = useContext(GlobalContext);
   const [value, setValue] = useState({
-    category: "",
-    amount: 0,
-    date: "",
-    month: "",
-    year: "",
+    category: "food",
+    amount: "",
   });
 
   useEffect(() => {
@@ -17,13 +14,16 @@ function SpendForm({ showAdd, closeShowAdd }) {
       .firestore()
       .collection("expense")
       .onSnapshot((snapshot) => {
-        const newExpense = snapshot.docs.map((item) => {
+        const newExpense = snapshot.docs.map((doc) => {
           return {
-            id: item.id,
-            ...item.data(),
+            id: doc.id,
+            ...doc.data(),
           };
         });
         setExpense(newExpense);
+        //set value here, value is the initial value, current value is the argument given, if any
+        //it is because setExpense fired?
+        setValue({ ...value });
         closeShowAdd();
       });
 
@@ -32,7 +32,16 @@ function SpendForm({ showAdd, closeShowAdd }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    firebase.firestore().collection("expense").add(value);
+    const date = new Date().toLocaleDateString();
+    const dateArray = date.split("/");
+    const valueToSend = {
+      ...value,
+      amount: value.amount ? Number(value.amount) : 0,
+      day: dateArray[0],
+      month: dateArray[1],
+      year: dateArray[2],
+    };
+    firebase.firestore().collection("expense").add(valueToSend);
   };
 
   return (
@@ -44,6 +53,7 @@ function SpendForm({ showAdd, closeShowAdd }) {
         name=""
         id=""
         value={value.category}
+        //set value here, current value is the same as value
         onChange={(e) => setValue({ ...value, category: e.target.value })}
       >
         <option value="food">Food</option>
@@ -57,6 +67,7 @@ function SpendForm({ showAdd, closeShowAdd }) {
         type="number"
         placeholder="Amount"
         value={value.amount}
+        //set value here, current value is the same as value
         onChange={(e) => setValue({ ...value, amount: e.target.value })}
       />
       <button type="submit">SUBMIT</button>

@@ -8,6 +8,7 @@ import SpendForm from "./components/SpendForm";
 export default function Home() {
   const [showAdd, setShowAdd] = useState(false);
   const [expense, setExpense] = useContext(GlobalContext);
+  // console.log(expense);
   return (
     <>
       <section className="home-head-section">

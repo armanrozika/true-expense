@@ -3,7 +3,7 @@ import { GlobalContext } from "../GlobalProvider";
 
 function SpendList() {
   const [expense, setExpense] = useContext(GlobalContext);
-  console.log(expense);
+  //console.log(expense);
   return (
     <section className="home-spend">
       <div className="category-spend">
