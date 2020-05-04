@@ -7,7 +7,7 @@ import SpendForm from "./components/SpendForm";
 
 export default function Home() {
   const [showAdd, setShowAdd] = useState(false);
-  const [expense, setExpense] = useContext(GlobalContext);
+  const { time, setTime } = useContext(GlobalContext);
   // console.log(expense);
   return (
     <>
@@ -21,8 +21,18 @@ export default function Home() {
 
         <p className="home-title">TRUE EXPENSE v0.1</p>
         <div className="home-button-selection">
-          <button>TODAY</button>
-          <button>THIS MONTH</button>
+          <button
+            style={{ background: time === "today" ? "#18a3e4" : "#fff" }}
+            onClick={() => setTime("today")}
+          >
+            TODAY
+          </button>
+          <button
+            style={{ background: time === "this_month" ? "#18a3e4" : "#fff" }}
+            onClick={() => setTime("this_month")}
+          >
+            THIS MONTH
+          </button>
         </div>
         <h4 className="current-amount">20.000.000</h4>
       </section>

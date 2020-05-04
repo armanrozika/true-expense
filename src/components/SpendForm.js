@@ -3,7 +3,7 @@ import firebase from "../firebase";
 import { GlobalContext } from "../GlobalProvider";
 
 function SpendForm({ showAdd, closeShowAdd }) {
-  const [expense, setExpense] = useContext(GlobalContext);
+  const { setExpense } = useContext(GlobalContext);
   const [value, setValue] = useState({
     category: "food",
     amount: "",
