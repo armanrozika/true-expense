@@ -21,8 +21,6 @@ function SpendForm({ showAdd, closeShowAdd }) {
           };
         });
         setExpense(newExpense);
-        //set value here, value is the initial value, current value is the argument given, if any
-        //it is because setExpense fired?
         setValue({ ...value });
         closeShowAdd();
       });

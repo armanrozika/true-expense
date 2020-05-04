@@ -1,14 +1,24 @@
 import React, { useState, useContext } from "react";
 import { GlobalContext } from "./GlobalProvider";
 import { Link } from "react-router-dom";
+import { formatNumber } from "./reusables";
 
 import SpendList from "./components/SpendList";
 import SpendForm from "./components/SpendForm";
 
 export default function Home() {
   const [showAdd, setShowAdd] = useState(false);
-  const { time, setTime } = useContext(GlobalContext);
-  // console.log(expense);
+  const { time, setTime, expense } = useContext(GlobalContext);
+  function calculateTotal() {
+    const arrayAmount = expense.map((item) => {
+      return item.amount;
+    });
+    const totalAmount = arrayAmount.reduce((a, b) => {
+      return a + b;
+    }, 0);
+
+    return formatNumber(totalAmount);
+  }
   return (
     <>
       <section className="home-head-section">
@@ -34,7 +44,7 @@ export default function Home() {
             THIS MONTH
           </button>
         </div>
-        <h4 className="current-amount">20.000.000</h4>
+        <h4 className="current-amount">Rp. {calculateTotal()}</h4>
       </section>
 
       <SpendList />

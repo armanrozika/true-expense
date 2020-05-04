@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../GlobalProvider";
+import { formatNumber } from "../reusables";
 
 function SpendList() {
   const { expense, time } = useContext(GlobalContext);
@@ -12,6 +13,12 @@ function SpendList() {
         categoryAvail.push(item.category);
       }
     }
+    const categoryObjects = categoryAvail.map((item) => {
+      return {
+        category: item,
+        amount: 0,
+      };
+    });
 
     let categoryByTime = [];
     if (time === "today") {
@@ -36,12 +43,21 @@ function SpendList() {
       });
     }
 
-    //console.log(categoryByTime);
-    const list = expense.map((item) => {
+    //calculate based on categoryAvail and categoryByTime
+    for (let i = 0; i < categoryObjects.length; i++) {
+      let category = categoryObjects[i];
+      categoryByTime.forEach((item) => {
+        if (category.category === item.category) {
+          categoryObjects[i].amount += item.amount;
+        }
+      });
+    }
+
+    const list = categoryObjects.map((item) => {
       return (
-        <div key={item.id} className="category-spend">
+        <div key={item.category} className="category-spend">
           <h4>{item.category.toUpperCase()}</h4>
-          <p>{item.amount}</p>
+          <p>{formatNumber(item.amount)}</p>
         </div>
       );
     });
