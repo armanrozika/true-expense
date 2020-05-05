@@ -30,14 +30,14 @@ function SpendForm({ showAdd, closeShowAdd }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const date = new Date().toLocaleDateString();
-    const dateArray = date.split("/");
+    const date = new Date().toDateString();
+    const dateArray = date.split(" ");
     const valueToSend = {
       ...value,
       amount: value.amount ? Number(value.amount) : 0,
-      day: dateArray[0],
+      day: dateArray[2],
       month: dateArray[1],
-      year: dateArray[2],
+      year: dateArray[3],
     };
     firebase.firestore().collection("expense").add(valueToSend);
   };

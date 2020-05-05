@@ -10,7 +10,27 @@ export default function Home() {
   const [showAdd, setShowAdd] = useState(false);
   const { time, setTime, expense } = useContext(GlobalContext);
   function calculateTotal() {
-    const arrayAmount = expense.map((item) => {
+    const date = new Date().toDateString();
+    const dateArray = date.split(" ");
+    let categoryByTime = [];
+    if (time === "today") {
+      const today = dateArray[2];
+      const month = dateArray[1];
+      const year = dateArray[3];
+
+      categoryByTime = expense.filter((item) => {
+        return item.day === today && item.month === month && item.year === year;
+      });
+    }
+    if (time === "this_month") {
+      const month = dateArray[1];
+      const year = dateArray[3];
+
+      categoryByTime = expense.filter((item) => {
+        return item.month === month && item.year === year;
+      });
+    }
+    const arrayAmount = categoryByTime.map((item) => {
       return item.amount;
     });
     const totalAmount = arrayAmount.reduce((a, b) => {

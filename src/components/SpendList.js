@@ -6,6 +6,8 @@ function SpendList() {
   const { expense, time } = useContext(GlobalContext);
 
   function renderSpendList() {
+    const date = new Date().toDateString();
+    const dateArray = date.split(" ");
     //get category available
     const categoryAvail = [];
     for (let item of expense) {
@@ -13,7 +15,7 @@ function SpendList() {
         categoryAvail.push(item.category);
       }
     }
-    const categoryObjects = categoryAvail.map((item) => {
+    let categoryObjects = categoryAvail.map((item) => {
       return {
         category: item,
         amount: 0,
@@ -22,21 +24,17 @@ function SpendList() {
 
     let categoryByTime = [];
     if (time === "today") {
-      const date = new Date().toLocaleDateString();
-      const dateArray = date.split("/");
-      const today = dateArray[0];
+      const today = dateArray[2];
       const month = dateArray[1];
-      const year = dateArray[2];
+      const year = dateArray[3];
 
       categoryByTime = expense.filter((item) => {
         return item.day === today && item.month === month && item.year === year;
       });
     }
     if (time === "this_month") {
-      const date = new Date().toLocaleDateString();
-      const dateArray = date.split("/");
       const month = dateArray[1];
-      const year = dateArray[2];
+      const year = dateArray[3];
 
       categoryByTime = expense.filter((item) => {
         return item.month === month && item.year === year;
@@ -52,6 +50,14 @@ function SpendList() {
         }
       });
     }
+
+    //console.log(categoryByTime);
+    if (categoryByTime.length < 1) {
+      categoryObjects = [];
+    }
+    categoryObjects = categoryObjects.filter((item) => {
+      return item.amount !== 0;
+    });
 
     const list = categoryObjects.map((item) => {
       return (
