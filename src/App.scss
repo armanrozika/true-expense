@@ -50,8 +50,10 @@
         width: 120px;
         border: none;
         padding: 10px 15px;
-        border-radius: 5px;
-        background-color: #f3f3f3;
+        border-radius: 30px;
+        background-color: transparent;
+        border: 1px solid #19a3e4;
+        color: #f6f6f6;
         font-weight: 600;
       }
     }
@@ -86,15 +88,20 @@
     position: fixed;
     width: 100%;
     padding: 15px;
-    background-color: #e1e1e1;
+    background-color: #3c3d3e;
+    border-top: 2px solid #4a758a;
+    box-shadow: 0 0 10px #000;
     left: 0;
-    //box-shadow: 0 0 5px #a0a0a0;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     transition: all 600ms ease;
     input {
       padding: 10px;
       font-size: 16px;
       width: 100%;
       margin-top: 15px;
+      border: none;
+      border-radius: 30px;
     }
     button {
       width: 100%;
@@ -103,7 +110,7 @@
       border: none;
       font-size: 16px;
       background-color: #19a3e4;
-      border-radius: 5px;
+      border-radius: 30px;
       color: #fff;
     }
   }

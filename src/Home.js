@@ -52,13 +52,15 @@ export default function Home() {
         <p className="home-title">TRUE EXPENSE v0.1</p>
         <div className="home-button-selection">
           <button
-            style={{ background: time === "today" ? "#18a3e4" : "#fff" }}
+            style={{ background: time === "today" ? "#18a3e4" : "transparent" }}
             onClick={() => setTime("today")}
           >
             TODAY
           </button>
           <button
-            style={{ background: time === "this_month" ? "#18a3e4" : "#fff" }}
+            style={{
+              background: time === "this_month" ? "#18a3e4" : "transparent",
+            }}
             onClick={() => setTime("this_month")}
           >
             THIS MONTH
