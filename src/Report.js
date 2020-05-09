@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import firebase from "./firebase";
 import { GlobalContext } from "./GlobalProvider";
+import { formatNumber } from "./reusables";
 
 export default function Report() {
   const { expense, setExpense } = useContext(GlobalContext);
   const [year, setYear] = useState(new Date().toDateString().split(" ")[3]);
-  const [month, setMonth] = useState("");
+  const [month, setMonth] = useState(new Date().toDateString().split(" ")[1]);
   const [availableYears, setAvailableYears] = useState([]);
   const [availableMonths, setAvailableMonths] = useState([]);
 
@@ -76,6 +77,7 @@ export default function Report() {
 
         //need to sort months and years
         years.sort();
+        months.push("none");
         setAvailableMonths(months);
         setAvailableYears(years);
         setExpense(newExpense);
@@ -89,12 +91,50 @@ export default function Report() {
       return;
     }
     //condition to render report
-    if (!month) {
-      //calculate this year with all month
-      return <p>{year}</p>;
-    }
 
-    return <p>hahaha</p>;
+    if (month === "none") {
+      //monthly report for selected year
+      return <p>{year}</p>;
+    } else {
+      //daily report for selected month
+      const filteredExpense = expense.filter((item) => {
+        return item.year === year && item.month === month;
+      });
+      const expenseDate = [];
+      filteredExpense.forEach((item) => {
+        if (!expenseDate.includes(item.day)) {
+          expenseDate.push(item.day);
+        }
+      });
+      expenseDate.sort();
+      const dateObjects = expenseDate.map((item) => {
+        return {
+          day: item,
+          amount: 0,
+        };
+      });
+      filteredExpense.forEach((item) => {
+        dateObjects.forEach((val, i) => {
+          if (item.day === val.day) {
+            dateObjects[i].amount += item.amount;
+          }
+        });
+      });
+      //console.log(dateObjects);
+      return (
+        <div className="daily-parent">
+          {dateObjects.map((item, i) => {
+            return (
+              <div key={i} className="daily-report">
+                <p>{item.day}</p>
+                <p>{formatNumber(item.amount)}</p>
+                <button>detail</button>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
   };
 
   return (
@@ -130,10 +170,7 @@ export default function Report() {
           })}
         </select>
       </div>
-      <div className="report-table">
-        <p>this is report rable</p>
-        {renderReport()}
-      </div>
+      <div className="report-table">{renderReport()}</div>
     </div>
   );
 }
